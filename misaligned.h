@@ -1,6 +1,6 @@
 typedef struct {
-    char *myMajorColor;
-    char *myMinorColor;
+    const char *myMajorColor;
+    const char *myMinorColor;
     int myNumberPair;
 }ColorPair;
 
