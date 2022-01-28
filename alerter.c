@@ -16,7 +16,7 @@ float getCelsiusFromFarenheit(float farenheit)  {
 	return (farenheit - 32) * 5 / 9;
 }
 
-void alertInCelcius(float farenheit, float (*getCelsiusFromFarenheit(float), int (*pointsToNetworkAlertStub)(float))
+void alertInCelcius(float farenheit, float (*getCelsiusFromFarenheit)(float), int (*pointsToNetworkAlertStub)(float))
 {
     float celcius = getCelsiusFromFarenheit(farenheit);
     int returnCode = pointsToNetworkAlertStub(celcius);
