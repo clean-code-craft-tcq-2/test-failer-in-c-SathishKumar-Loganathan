@@ -5,7 +5,7 @@
 // Decomposed below function part that can be tested
 ColorPair provideColorMap(int i, int j) {
     ColorPair myColorPair;
-	myColorPair.myNumberPair = i * 5 + j;
+	myColorPair.myNumberPair = (i * 5) + j + 1;
 	myColorPair.myMajorColor = majorColor[i];
     // Intention of the test is to fail and get detected.
     // Hence set the index below as 'i' instead of 'j' as given in original problem.
