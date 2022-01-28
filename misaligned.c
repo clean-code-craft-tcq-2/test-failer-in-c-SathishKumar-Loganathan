@@ -9,7 +9,7 @@ ColorPair provideColorMap(int i, int j) {
 	myColorPair.myMajorColor = majorColor[i];
     // Intention of the test is to fail and get detected.
     // Hence set the index below as 'i' instead of 'j' as given in original problem.
-	myColorPair.myMinorColor = minorColor[i]; 
+	myColorPair.myMinorColor = minorColor[j]; 
 
     return myColorPair;
 }
