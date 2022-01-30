@@ -7,8 +7,7 @@ ColorPair provideColorMap(int i, int j) {
     ColorPair myColorPair;
 	myColorPair.myNumberPair = (i * 5) + j + 1;
 	myColorPair.myMajorColor = majorColor[i];
-    // Intention of the test is to fail and get detected.
-    // Hence set the index below as 'i' instead of 'j' as given in original problem.
+    // Bug on below line is now fixed with correct loopControl variable]
 	myColorPair.myMinorColor = minorColor[j]; 
 
     return myColorPair;
@@ -20,37 +19,31 @@ void FormatAndPrintColorMapToDisplay(ColorPair ColorPairReceived) {
 }
 
 // Loop through, extract and send ColorMap to formatter function for printing
-int printColorMap() {
+int printColorMap(void (*pointsToFormatAndPrintColorMapToDisplay)(ColorPair)) {
 	int i = 0, j = 0;
 	for(i = 0; i < 5; i++) {
         for(j = 0; j < 5; j++) {
-			FormatAndPrintColorMapToDisplay(provideColorMap(i,j));
+			pointsToFormatAndPrintColorMapToDisplay(provideColorMap(i,j));
 		}
 	}
     return i * 5 + j;
 }
 
 void unitTestColorMapforRandomPairNumber(int expectedNumberPair) {
-	if((expectedNumberPair > 0) && expectedNumberPair < 26)	{
-		int loopCount_i = (expectedNumberPair-1)/5;
-		int loopCount_j = (expectedNumberPair-1)%5;
-		ColorPair testColorpair = provideColorMap(loopCount_i,loopCount_j);
- 		assert(testColorpair.myNumberPair == expectedNumberPair);
- 		assert(testColorpair.myMajorColor == majorColor[loopCount_i]);
- 		assert(testColorpair.myMinorColor == minorColor[loopCount_j]);
-	}
-	else
-		printf("Sorry, that's not a valid PairNumber. Use 1 to 25 please!!\n");
+    int loopCount_i = (expectedNumberPair-1)/5;
+	int loopCount_j = (expectedNumberPair-1)%5;
+	ColorPair testColorpair = provideColorMap(loopCount_i,loopCount_j);
+ 	assert(testColorpair.myNumberPair == expectedNumberPair);
+ 	assert(testColorpair.myMajorColor == majorColor[loopCount_i]);
+ 	assert(testColorpair.myMinorColor == minorColor[loopCount_j]);
 }
 
 int main() {
-    int result = printColorMap();
-    assert(result == 30);
-    unitTestColorMapforRandomPairNumber(5);
-    unitTestColorMapforRandomPairNumber(23);
-    unitTestColorMapforRandomPairNumber(-4);
-    unitTestColorMapforRandomPairNumber(72);
+    int result = printColorMap(&FormatAndPrintColorMapToDisplay);
 
-    printf("All is well (maybe!)\n");
+    for(int i=1; i<=25; i++)
+        unitTestColorMapforRandomPairNumber(i);
+
+    printf("All is well\n");
     return 0;
 }
