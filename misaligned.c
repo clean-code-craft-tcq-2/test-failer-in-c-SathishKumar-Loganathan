@@ -40,7 +40,8 @@ void unitTestColorMapforRandomPairNumber(int expectedNumberPair) {
 
 int main() {
     int result = printColorMap(&FormatAndPrintColorMapToDisplay);
-
+    assert(result == 30);
+    
     for(int i=1; i<=25; i++)
         unitTestColorMapforRandomPairNumber(i);
 
